@@ -1,10 +1,18 @@
 import './App.css';
-import Navigation from './components/Navigation/Navigation';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/Home/Home';
+import RightFeed from './components/RightFeed/RightFeed';
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} >
+            <Route path="/" element={<RightFeed />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
