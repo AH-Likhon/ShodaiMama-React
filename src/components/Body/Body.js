@@ -107,7 +107,7 @@ function Body(props) {
 
 
             </Box>
-        </div >
+        </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -149,7 +149,7 @@ function Body(props) {
             </Box>
             <Box
                 component="main"
-                sx={{ flexGrow: 1, m: 0, mt: '-63px', zIndex: 0, maxWidth: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{ flexGrow: 1, m: 0, mt: '13px', zIndex: 0, maxWidth: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
 

@@ -24,7 +24,7 @@ const Navigation = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
 
-            <AppBar position="static" sx={{ backgroundColor: '#fff', border: 'none', color: 'white', overFlow: 'hidden', zIndex: 999 }}>
+            <AppBar position="fixed" sx={{ backgroundColor: '#fff', border: 'none', color: 'white', overFlow: 'hidden', zIndex: 999 }}>
                 <Toolbar>
                     <IconButton
                         size="large"

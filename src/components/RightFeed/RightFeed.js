@@ -1,11 +1,12 @@
+import React from 'react';
 import { Box, Typography } from '@mui/material';
-import React, { Component } from 'react';
 import CarouselSlider from './CarouselSlider/CarouselSlider';
+import ScrollBox from './ScrollBox/ScrollBox';
 
 const RightFeed = () => {
     return (
         <>
-            <Box sx={{ w: 1, display: 'flex', justifyContent: 'flext-start', alignItems: 'center', boxShadow: '0px 0px 3px 0px gray', flexGrow: 1 }}>
+            <Box position='fixed' sx={{ width: '81%', display: 'flex', justifyContent: 'flext-start', alignItems: 'center', boxShadow: '0px 0px 3px 0px gray', overFlow: 'hidden', zIndex: 99, backgroundColor: '#fff', flexGrow: 1 }}>
                 <Box
                     sx={{
                         width: '33.33%',
@@ -57,9 +58,10 @@ const RightFeed = () => {
                 </Box>
             </Box>
 
-            {/* Carousal Slider start */}
-            <Box sx={{ width: '97%', m: '1px auto' }}>
+            {/* Main Body start */}
+            <Box sx={{ width: '97%', m: '57px auto' }}>
                 <CarouselSlider />
+                <ScrollBox />
             </Box>
 
         </>
