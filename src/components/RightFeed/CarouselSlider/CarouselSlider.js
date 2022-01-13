@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { Box } from '@mui/material';
 
 const CarouselSlider = () => {
 
     return (
+
         <Carousel autoPlay infiniteLoop={true} showStatus={false} showThumbs={false} showIndicators={false}>
             <div>
                 <img src="https://bucket.shodaimama.com/files/sm/images/T16nh11640530118286U4YYkV.jpeg" />

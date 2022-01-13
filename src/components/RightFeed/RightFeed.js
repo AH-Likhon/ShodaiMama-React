@@ -2,10 +2,12 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CarouselSlider from './CarouselSlider/CarouselSlider';
 import ScrollBox from './ScrollBox/ScrollBox';
+import Footer from '../Footer/Footer';
 
 const RightFeed = () => {
     return (
         <>
+
             <Box position='fixed' sx={{ width: '81%', display: 'flex', justifyContent: 'flext-start', alignItems: 'center', boxShadow: '0px 0px 3px 0px gray', overFlow: 'hidden', zIndex: 99, backgroundColor: '#fff', flexGrow: 1 }}>
                 <Box
                     sx={{
@@ -63,6 +65,8 @@ const RightFeed = () => {
                 <CarouselSlider />
                 <ScrollBox />
             </Box>
+
+            <Footer />
 
         </>
     );
