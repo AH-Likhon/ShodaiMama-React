@@ -128,7 +128,6 @@ const Footer = () => {
 
                     <Button
                         sx={{
-                            // width: '100%',
                             fontSize: '16px',
                             letterSpacing: '1px',
                             fontWeight: 400,
@@ -162,7 +161,6 @@ const Footer = () => {
                     cursor: 'pointer',
                     zIndex: 0,
                     border: 'none',
-                    // my: 1,
                     cursor: 'pointer'
                 }}
                 image={footerImage}

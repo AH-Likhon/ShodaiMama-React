@@ -1,22 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import fastDelivery from '../../../images/fast-delivery.86065e4e.png';
 import download from '../../../images/download.png';
 import download1 from '../../../images/download-1.png';
-
+import { addToCart, getCart, removeFromCart } from '../../LocalStorage/LocalStorage';
+import Swal from 'sweetalert2';
 
 const MensCloth = () => {
 
     const [fetchData, setFetchData] = useState([]);
+    const [remove, setRemove] = useState(false);
 
-    fetch('https://fakestoreapi.com/products')
-        .then(res => res.json())
-        .then(data => setFetchData(data))
+    useEffect(() => {
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(data => setFetchData(data))
+    }, [])
 
     const mensClothData = fetchData.filter(data => data.category === "men's clothing")
 
-    console.log(mensClothData);
+
+    const handleAddToCart = data => {
+        // console.log(data);
+        addToCart(data.title);
+        setRemove(true);
+        Swal.fire(
+            'Great!',
+            'Successfully added this item to LocalStorage!'
+        )
+    }
+
+    const handleRemoveFromCart = data => {
+        removeFromCart(data.title);
+        const getData = getCart();
+        console.log(Object.values(getData).includes(getData[data.title]));
+
+        if (Object.values(getData).includes(getData[data.title])) {
+            Swal.fire(
+                'Great!',
+                'Successfully remove this item from LocalStorage!'
+            )
+        } else {
+            Swal.fire(
+                'Sorry!',
+                'This item is no longer in LocalStorage!'
+            )
+        }
+    }
 
     return (
         <>
@@ -38,7 +69,7 @@ const MensCloth = () => {
                         Men's Clothing
                     </Typography>
                     <Typography variant="p">
-                        গুনগত মান বজায় রাখার জন্য পচনশীল খাদ্যপণ্য সরবরাহ করা হয় সকাল ৮-১১ টা পর্যন্ত ।
+                        আপনার পছন্দের পোশাক কেনাকাটা করতে পারবেন সকাল ৮ টা থেকে রাত ১০ টা পর্যন্ত ।
                     </Typography>
                 </Box>
             </Box>
@@ -134,6 +165,28 @@ const MensCloth = () => {
                                 </Box>
                             </CardContent>
 
+                            {
+                                remove && <Button
+                                    sx={{
+                                        width: '60%',
+                                        textTransform: 'capitalize',
+                                        backgroundColor: '#006A4E',
+                                        transition: 'transform 1s',
+                                        py: '2px',
+                                        fontSize: '12px',
+                                        mb: 1,
+                                        '&:hover': {
+                                            transform: 'translateY(-2px)',
+                                            backgroundColor: '#006A4E',
+                                        }
+                                    }}
+                                    onClick={() => handleRemoveFromCart(data)}
+                                    variant="contained"
+                                >
+                                    Remove From Cart
+                                </Button>
+                            }
+
                             <Button
                                 sx={{
                                     width: '100%',
@@ -147,6 +200,7 @@ const MensCloth = () => {
                                         backgroundColor: '#006A4E',
                                     }
                                 }}
+                                onClick={() => handleAddToCart(data)}
                                 variant="contained"
                             >
                                 Add To Cart

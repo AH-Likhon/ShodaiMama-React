@@ -46,7 +46,6 @@ const Navigation = () => {
                             sx={{
                                 textTransform: 'capitalize',
                                 fontWeight: '600',
-                                // fontSize: '15px',
                                 '&:hover': { backgroundColor: 'transparent' }
                             }}
                             color="inherit"
@@ -123,8 +122,6 @@ const Navigation = () => {
                             </Typography>
                         </Box>
                     </Box>
-
-
 
                 </Toolbar>
             </AppBar>

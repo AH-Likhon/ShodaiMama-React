@@ -60,12 +60,13 @@ const RightFeed = () => {
                 </Box>
             </Box>
 
-            {/* Main Body start */}
+            {/* Main Body */}
             <Box sx={{ width: '97%', m: '57px auto' }}>
                 <CarouselSlider />
                 <ScrollBox />
             </Box>
 
+            {/* Footer */}
             <Footer />
 
         </>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import pineapple from '../../../images/pineapple.webp';
@@ -12,6 +12,8 @@ import tomato from '../../../images/tomato.webp';
 import pumpkin from '../../../images/pumpkin.webp';
 import roast from '../../../images/roast.jpg';
 import cock from '../../../images/cock.webp';
+import { addToCart, getCart, removeFromCart } from '../../LocalStorage/LocalStorage';
+import Swal from 'sweetalert2';
 
 const freshData = [
     { title: 'Pineapple Medium', quantity: 'each', price: '45', img: pineapple },
@@ -25,7 +27,35 @@ const freshData = [
 ]
 
 const FreshCard = () => {
+    const [remove, setRemove] = useState(false);
 
+    const handleAddToCart = data => {
+        // console.log(data);
+        addToCart(data.title);
+        setRemove(true);
+        Swal.fire(
+            'Great!',
+            'Successfully added this item to LocalStorage!'
+        )
+    }
+
+    const handleRemoveFromCart = data => {
+        removeFromCart(data.title);
+        const getData = getCart();
+        console.log(Object.values(getData).includes(getData[data.title]));
+
+        if (Object.values(getData).includes(getData[data.title])) {
+            Swal.fire(
+                'Great!',
+                'Successfully remove this item from LocalStorage!'
+            )
+        } else {
+            Swal.fire(
+                'Sorry!',
+                'This item is no longer in LocalStorage!'
+            )
+        }
+    }
 
     return (
         <>
@@ -141,6 +171,28 @@ const FreshCard = () => {
                                 </Box>
                             </CardContent>
 
+                            {
+                                remove && <Button
+                                    sx={{
+                                        width: '60%',
+                                        textTransform: 'capitalize',
+                                        backgroundColor: '#006A4E',
+                                        transition: 'transform 1s',
+                                        py: '2px',
+                                        fontSize: '12px',
+                                        mb: 1,
+                                        '&:hover': {
+                                            transform: 'translateY(-2px)',
+                                            backgroundColor: '#006A4E',
+                                        }
+                                    }}
+                                    onClick={() => handleRemoveFromCart(data)}
+                                    variant="contained"
+                                >
+                                    Remove From Cart
+                                </Button>
+                            }
+
                             <Button
                                 sx={{
                                     width: '100%',
@@ -153,6 +205,7 @@ const FreshCard = () => {
                                         backgroundColor: '#006A4E',
                                     }
                                 }}
+                                onClick={() => handleAddToCart(data)}
                                 variant="contained"
                             >
                                 Add To Cart

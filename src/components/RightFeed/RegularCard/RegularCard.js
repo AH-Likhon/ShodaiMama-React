@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import miniket from '../../../images/minicket.jpg';
@@ -12,6 +12,8 @@ import oats from '../../../images/oats.jpg';
 import jar from '../../../images/jar.webp';
 import horlicks from '../../../images/horlicks.jpg';
 import spread from '../../../images/spread.jpg';
+import { addToCart, getCart, removeFromCart } from '../../LocalStorage/LocalStorage';
+import Swal from 'sweetalert2';
 
 const freshData = [
     { title: 'Miniket Rice Premium', quantity: '5 kg', price: '350', img: miniket },
@@ -25,6 +27,36 @@ const freshData = [
 ]
 
 const RegularCard = () => {
+    const [remove, setRemove] = useState(false);
+
+    const handleAddToCart = data => {
+        // console.log(data);
+        addToCart(data.title);
+        setRemove(true);
+        Swal.fire(
+            'Great!',
+            'Successfully added this item to LocalStorage!'
+        )
+    }
+
+    const handleRemoveFromCart = data => {
+        removeFromCart(data.title);
+        const getData = getCart();
+        console.log(Object.values(getData).includes(getData[data.title]));
+
+        if (Object.values(getData).includes(getData[data.title])) {
+            Swal.fire(
+                'Great!',
+                'Successfully remove this item from LocalStorage!'
+            )
+        } else {
+            Swal.fire(
+                'Sorry!',
+                'This item is no longer in LocalStorage!'
+            )
+        }
+    }
+
     return (
         <>
 
@@ -140,6 +172,28 @@ const RegularCard = () => {
                                 </Box>
                             </CardContent>
 
+                            {
+                                remove && <Button
+                                    sx={{
+                                        width: '60%',
+                                        textTransform: 'capitalize',
+                                        backgroundColor: '#006A4E',
+                                        transition: 'transform 1s',
+                                        py: '2px',
+                                        fontSize: '12px',
+                                        mb: 1,
+                                        '&:hover': {
+                                            transform: 'translateY(-2px)',
+                                            backgroundColor: '#006A4E',
+                                        }
+                                    }}
+                                    onClick={() => handleRemoveFromCart(data)}
+                                    variant="contained"
+                                >
+                                    Remove From Cart
+                                </Button>
+                            }
+
                             <Button
                                 sx={{
                                     width: '100%',
@@ -152,6 +206,7 @@ const RegularCard = () => {
                                         backgroundColor: '#006A4E',
                                     }
                                 }}
+                                onClick={() => handleAddToCart(data)}
                                 variant="contained"
                             >
                                 Add To Cart
