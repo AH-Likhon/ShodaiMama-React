@@ -1,36 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import pineapple from '../../../images/pineapple.webp';
 import fastDelivery from '../../../images/fast-delivery.86065e4e.png';
 import download from '../../../images/download.png';
 import download1 from '../../../images/download-1.png';
-import banana from '../../../images/banana.webp';
-import gourd from '../../../images/calabash.png';
-import brinjal from '../../../images/brinjal.webp';
-import tomato from '../../../images/tomato.webp';
-import pumpkin from '../../../images/pumpkin.webp';
-import roast from '../../../images/roast.jpg';
-import cock from '../../../images/cock.webp';
 
-const freshData = [
-    { title: 'Pineapple Medium', quantity: 'each', price: '45', img: pineapple },
-    { title: 'Banana Green', quantity: '4 pcs', price: '32', img: banana },
-    { title: 'Gourd', quantity: 'each', price: '65', img: gourd },
-    { title: 'Round Brinjal', quantity: '500 gm', price: '32', img: brinjal },
-    { title: 'Red Tomato', quantity: '500 gm', price: '19', img: tomato },
-    { title: 'Sweet Pumpkin', quantity: 'each(3kg+)', price: '70', img: pumpkin },
-    { title: 'Roast Chicken', quantity: '250 gm', price: '130', img: roast },
-    { title: 'Cock Chicken Skin Off', quantity: '500 gm', price: '230', img: cock },
-]
 
-const FreshCard = () => {
+const MensCloth = () => {
 
+    const [fetchData, setFetchData] = useState([]);
+
+    fetch('https://fakestoreapi.com/products')
+        .then(res => res.json())
+        .then(data => setFetchData(data))
+
+    const mensClothData = fetchData.filter(data => data.category === "men's clothing")
+
+    console.log(mensClothData);
 
     return (
         <>
 
-            <Box sx={{ w: 1, py: '15px', backgroundColor: '#F1F1F1', m: '30px 0px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+            <Box sx={{ w: 1, py: '15px', backgroundColor: '#F1F1F1', m: '50px 0px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                 <Box sx={{
                     borderRadius: '10px',
                     width: '1%',
@@ -44,7 +35,7 @@ const FreshCard = () => {
                     marginLeft: '15px',
                 }}>
                     <Typography sx={{ fontWeight: 'bold' }} variant="h5">
-                        Fresh
+                        Men's Clothing
                     </Typography>
                     <Typography variant="p">
                         গুনগত মান বজায় রাখার জন্য পচনশীল খাদ্যপণ্য সরবরাহ করা হয় সকাল ৮-১১ টা পর্যন্ত ।
@@ -53,8 +44,9 @@ const FreshCard = () => {
             </Box>
 
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
                 {
-                    freshData.map(data => <Grid item sx={{ mt: 0 }} xs={2} sm={4} md={3}>
+                    mensClothData?.map(data => <Grid item sx={{ mt: 0 }} xs={2} sm={4} md={3}>
                         <Card sx={{ maxWidth: 250, boxShadow: '0px 1px 4px 1px rgba(105,96,96,0.56)', cursor: 'pointer' }}>
 
                             <Button sx={{
@@ -65,26 +57,27 @@ const FreshCard = () => {
                                 float: 'right',
                                 zIndex: 1,
                                 '&:hover': { backgroundColor: '#44BD32' }
-                            }} variant="contained" size="small">Fresh</Button>
+                            }} variant="contained" size="small">{data.category}</Button>
 
                             <CardMedia
                                 component="img"
                                 sx={{
-                                    ml: 8,
-                                    width: '50%',
+                                    ml: 10,
+                                    mt: 5,
+                                    width: '40%',
                                     cursor: 'pointer',
                                     zIndex: 0,
                                     transition: 'transform 1s linear',
                                     border: 'none',
                                     '&:hover': { transform: 'scale(1.1)' }
                                 }}
-                                image={data.img}
+                                image={data.image}
                                 alt="green iguana"
                             />
 
                             <CardContent>
                                 <Typography sx={{ fontWeight: 'bold' }} variant="p" component="div">
-                                    {data.title}
+                                    {data.title.slice(0, 24)}
                                 </Typography>
 
                                 <Typography sx={{ color: 'red' }} variant="subtitle2" component="div">
@@ -123,7 +116,7 @@ const FreshCard = () => {
                                             image={fastDelivery}
                                             sx={{ width: '18%', }}
                                         />
-                                        <Typography sx={{ color: 'gray', fontSize: '12px', ml: 1 }} variant="body2">Next Morning</Typography>
+                                        <Typography sx={{ color: 'gray', fontSize: '12px', ml: 1 }} variant="body2">Within 24 hours</Typography>
                                     </Box>
 
                                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -148,6 +141,7 @@ const FreshCard = () => {
                                     backgroundColor: '#006A4E',
                                     transition: 'transform 1s',
                                     py: '8px',
+                                    mb: 0,
                                     '&:hover': {
                                         transform: 'translateY(-2px)',
                                         backgroundColor: '#006A4E',
@@ -192,4 +186,4 @@ const FreshCard = () => {
     );
 };
 
-export default FreshCard;
+export default MensCloth;

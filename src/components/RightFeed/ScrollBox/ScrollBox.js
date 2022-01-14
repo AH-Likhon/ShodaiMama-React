@@ -5,6 +5,7 @@ import RegularCard from '../RegularCard/RegularCard';
 import PreloaderCard from '../PreloaderCard/PreloaderCard';
 import ShodaiMama from '../ShodaiMama/ShodaiMama';
 import WhyShodaiMama from '../WhyShodaiMama/WhyShodaiMama';
+import MensCloth from '../MensCloth/MensCloth';
 
 const ScrollBox = () => {
     return (
@@ -12,6 +13,7 @@ const ScrollBox = () => {
             <PreloaderCard />
             <FreshCard />
             <RegularCard />
+            <MensCloth />
             <ShodaiMama />
             <WhyShodaiMama />
         </>
