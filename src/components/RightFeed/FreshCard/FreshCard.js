@@ -218,7 +218,10 @@ const FreshCard = () => {
 
             <Button
                 sx={{
-                    width: '12%',
+                    width: {
+                        xs: '35%',
+                        md: '12%'
+                    },
                     color: '#605e5842',
                     float: 'right',
                     border: '1px solid #605e5842',

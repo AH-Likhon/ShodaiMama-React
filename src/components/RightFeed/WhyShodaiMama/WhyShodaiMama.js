@@ -49,11 +49,16 @@ const WhyShodaiMama = () => {
     return (
         <>
 
-            <Typography sx={{ mt: 8, mb: -2, fontWeight: 'bold', float: 'left' }} variant="h5">
+            <Typography sx={{
+                mt: 8, mb: {
+                    xs: 1,
+                    md: 0
+                }, fontWeight: 'bold', float: 'left'
+            }} variant="h5">
                 Why Shodaimama
             </Typography>
 
-            <BorderLinearProgress variant="determinate" value={26} />
+            <BorderLinearProgress sx={{ width: '100%' }} variant="determinate" value={26} />
 
 
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
